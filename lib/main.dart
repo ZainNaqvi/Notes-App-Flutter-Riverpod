@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(const MyApp());
+  // wrap the MyApp widget to ProviderScope => Just like disposing
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -11,56 +14,99 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.pink,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage1(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class MyHomePage1 extends HookWidget {
+  const MyHomePage1({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final titleController = useTextEditingController();
+    final descController = useTextEditingController();
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("Flutter Riverpod"),
       ),
-      body: Center(
+      body: Container(
+        margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            Text(
+              'State Management With Flutter Riverpod',
+              style: Theme.of(context)
+                  .textTheme
+                  .headline5!
+                  .copyWith(color: Colors.pink),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: titleController,
+              decoration: InputDecoration(
+                hintText: "Title",
+                enabledBorder: outlineBorder(),
+                focusedBorder: outlineBorder(),
+                border: outlineBorder(),
+              ),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: descController,
+              decoration: InputDecoration(
+                hintText: "Description",
+                enabledBorder: outlineBorder(),
+                focusedBorder: outlineBorder(),
+                border: outlineBorder(),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Center(
+              child: SizedBox(
+                  width: 190,
+                  height: 35,
+                  child: ElevatedButton(onPressed: () {}, child: Text("Add"))),
+            ),
+            const SizedBox(height: 16),
             const Text(
-              'You have pushed the button this many times:',
+              'Your Notes:',
             ),
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              'Total No of notes are :0',
+              style: Theme.of(context).textTheme.bodyText1,
             ),
+
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+                color: Colors.pink,
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(30),
+                  topLeft: Radius.circular(30),
+                )),
+            height: 50,
+          ),
+        ],
       ),
+    );
+  }
+
+  OutlineInputBorder outlineBorder() {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(30),
+      borderSide: BorderSide(color: Colors.grey),
+      gapPadding: 1,
     );
   }
 }
