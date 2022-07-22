@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class CheetahButton extends StatelessWidget {
+class CustomButton extends StatelessWidget {
   final String text;
   final Function onPressed;
   final Color? color;
 
-  CheetahButton({
+  CustomButton({
     required this.text,
     required this.onPressed,
     this.color,
@@ -18,7 +18,7 @@ class CheetahButton extends StatelessWidget {
         style: TextButton.styleFrom(
           padding: EdgeInsets.all(16),
           elevation: 8,
-          backgroundColor: Theme.of(context).primaryColor,
+          backgroundColor: Colors.pink,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
           ),

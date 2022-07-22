@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../model/user.dart';
 import '../widget/cheetah_button.dart';
-import '../widget/cheetah_input.dart';
+import '../widget/riverpod_input.dart';
 import '../widget/user_list.dart';
 import 'user_list_screen.dart';
 
@@ -34,10 +34,11 @@ class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.pink,
         title: Text(
-          "Riverpod Demo",
+          "Flutter Riverpod ",
           style: TextStyle(color: Colors.white),
         ),
       ),
@@ -46,11 +47,17 @@ class HomeState extends State<Home> {
         child: Form(
           key: _formKey,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
-                "Cheetah Coding",
-                style: TextStyle(fontSize: 30),
+              const Text(
+                "Flutter State Management with Riverpod",
+                style: TextStyle(fontSize: 16, color: Colors.pink),
+              ),
+              SizedBox(height: 5),
+              const Text(
+                "Flutter Hooks,Flutter Riverpod",
+                style: TextStyle(fontSize: 12),
               ),
               SizedBox(height: 16),
               CheetahInput(
@@ -70,7 +77,7 @@ class HomeState extends State<Home> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CheetahButton(
+                  CustomButton(
                     text: 'Add',
                     onPressed: () {
                       if (!_formKey.currentState!.validate()) return;
@@ -81,7 +88,7 @@ class HomeState extends State<Home> {
                     },
                   ),
                   SizedBox(width: 8),
-                  CheetahButton(
+                  CustomButton(
                     text: 'List',
                     onPressed: () {
                       Navigator.push(

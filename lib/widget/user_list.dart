@@ -33,6 +33,7 @@ class UserList extends StatelessWidget {
                 ],
               ),
               IconButton(
+                color: Colors.pink,
                 icon: Icon(Icons.delete),
                 onPressed: () => onDelete(users[index]),
               )
