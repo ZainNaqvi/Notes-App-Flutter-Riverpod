@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../model/user.dart';
-import '../widget/cheetah_button.dart';
+import '../widget/riverpod_button.dart';
 import '../widget/riverpod_input.dart';
 import '../widget/user_list.dart';
 import 'user_list_screen.dart';
